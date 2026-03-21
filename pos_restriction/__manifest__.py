@@ -7,6 +7,7 @@
     'data': [
         'security/pos_refund_groups.xml',
         
+        
     ],
     'assets': {
         'point_of_sale._assets_pos': [
