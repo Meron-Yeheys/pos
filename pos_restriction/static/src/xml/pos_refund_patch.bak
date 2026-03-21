@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <!-- Patch TicketScreen to pass hideDiscount to Orderline -->
+    <t t-inherit="point_of_sale.TicketScreen" t-inherit-mode="extension">
+        <xpath expr="//OrderWidget//Orderline" position="attributes">
+            <attribute name="t-att-hideDiscount">isOrderSynced and !hasFullRefundAccess</attribute>
+        </xpath>
+
+        <!-- Hide the 'Select product to refund' message if no access -->
+        <xpath expr="//div[contains(text(), 'Select the product(s) to refund')]" position="attributes">
+            <attribute name="t-if">isOrderSynced and hasFullRefundAccess</attribute>
+        </xpath>
+        
+        <!-- Also hide it in mobile -->
+        <xpath expr="//div[contains(@class, 'bg-100') and contains(text(), 'Select')]" position="attributes">
+            <attribute name="t-if">isOrderSynced and hasFullRefundAccess</attribute>
+        </xpath>
+    </t>
+
+    <!-- Patch Orderline to hide discount if props.hideDiscount is true -->
+    <t t-inherit="point_of_sale.Orderline" t-inherit-mode="extension">
+        <xpath expr="//li[contains(@t-if, 'line.discount')]" position="attributes">
+             <attribute name="t-if">line.price !== 0 and line.discount and line.discount !== '0' and !props.basic_receipt and !props.hideDiscount</attribute>
+        </xpath>
+    </t>
+</templates>
