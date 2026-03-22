@@ -11,7 +11,7 @@
     ],
     'assets': {
         'point_of_sale._assets_pos': [
-            'pos_restriction/static/src/js/pos_refund_patch.js',
+            'pos_restriction/static/src/js/pos_restriction.js',
         ],
     },
     'installable': True,
