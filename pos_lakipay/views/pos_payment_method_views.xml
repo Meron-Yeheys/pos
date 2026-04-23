@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- We can add Lakipay specific API configuration fields here later if needed. -->
+    <!-- For now, it will use the global Lakipay settings. -->
+</odoo>

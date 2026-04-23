@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="pos_lakipay.LakipayQrPopup">
+        <Dialog title="'LakiPay Payment'">
+            <div class="d-flex flex-column align-items-center justify-content-center text-center p-3">
+                <t t-if="props.paymentUrl">
+                    <div style="background: white; padding: 10px; display: inline-block; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 15px;">
+                        <img t-att-src="props.qrImageUrl || ''" 
+                             style="display: block; width: 180px; height: 180px; margin: 0 auto;"
+                             alt="Scan to Pay"/>
+                    </div>
+                    <p style="font-size: 16px; color: #333; font-weight: bold; margin-bottom: 10px;">
+                        Scan to Pay
+                    </p>
+                </t>
+                <t t-else="">
+                    <div style="font-size: 48px; margin-bottom: 16px;">📱</div>
+                </t>
+
+                <p style="color: #555; margin-bottom: 10px; font-size: 14px;">
+                    Order: <b><t t-esc="props.orderName"/></b><br/>
+                    Amount: <b><t t-esc="props.formattedAmount"/></b>
+                </p>
+                
+                <p style="color: #888; font-size: 13px; margin-bottom: 15px;">
+                    Please scan the QR code above with your phone to complete the payment.
+                </p>
+                <p t-if="props.paymentUrl" style="color: #999; font-size: 11px; margin-bottom: 10px; word-break: break-all;">
+                    If QR does not load, open:
+                    <a t-att-href="props.paymentUrl" target="_blank" rel="noopener noreferrer">payment link</a>
+                </p>
+
+                <div style="display:flex; justify-content:center; gap:8px; align-items:center; color:#aaa; font-size:11px; margin-bottom:15px;">
+                    <span>⏳</span>
+                    <span>Waiting for payment confirmation. This popup closes automatically.</span>
+                </div>
+            </div>
+            <t t-set-slot="footer">
+                <button class="btn btn-secondary" t-on-click="() => { props.cancel(); props.close(); }">Cancel</button>
+            </t>
+        </Dialog>
+    </t>
+
+</templates>
